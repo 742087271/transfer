@@ -14,7 +14,7 @@ import {
 } from "vue";
 import { LeftOrRight } from "../../extends/data.js";
 
-const emits = defineEmits(["checkAll"]);
+const emits = defineEmits(["setCheckedData", "removeCheckedData"]);
 const props = defineProps({
   leftOrRight: {
     type: String as PropType<LeftOrRight>,
@@ -29,28 +29,32 @@ const props = defineProps({
   },
 });
 const checkBoxRef = ref<HTMLInputElement>();
-const checkAll = () => {
-  nextTick(() => {
-    props.data.forEach((item) => {
+const checkAll = (ev:Event) => {
+  const { checked } = ev.target as HTMLInputElement;
+  if (checked) {
+    props.data.forEach(item => {
       item.checked = true;
+      emits('setCheckedData',props.leftOrRight, item)
     });
-  });
-
-  emits("checkAll", props.leftOrRight);
+  } else {
+    props.data.forEach(item => {
+      item.checked = false;
+       emits('setCheckedData',props.leftOrRight, item)
+    });
+  }
 };
 const clearChecked = () => {
   checkBoxRef.value!.checked = false;
 };
 watchEffect(() => {
-  if (props.data.length === 0) {
-    nextTick(() => {
-      clearChecked();
-    });
+  const checkedLength = props.data.filter(item => item.checked).length;
+  console.log(checkedLength);
+  
+  if (props.data.length !== checkedLength) {
+    nextTick(clearChecked);
   }
 });
-defineExpose({
-  clearChecked,
-});
+
 </script>
 
 <style scoped lang="scss">

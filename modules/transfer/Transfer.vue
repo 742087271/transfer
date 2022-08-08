@@ -12,7 +12,8 @@
             ref="leftCheckAllRef"
             :left-or-right="LeftOrRight.left"
             :data="leftListData"
-            @check-all="checkAll"
+            @set-checked-data="setCheckedData"
+            @remove-checked-data="removeCheckedData"
           />
           <list-tile :title="leftTitle" />
         </div>
@@ -38,7 +39,8 @@
         <div class="list-header">
           <checked-all
             ref="rightCheckAllRef"
-            @check-all="checkAll"
+            @set-checked-data="setCheckedData"
+            @remove-checked-data="removeCheckedData"
             :left-or-right="LeftOrRight.right"
             :data="rightListData"
           />
@@ -57,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { LeftOrRight } from "../extends/data";
+import data, { LeftOrRight } from "../extends/data";
 import propsDefination from "../extends/props";
 import {
   useTargetIndex,
@@ -71,7 +73,7 @@ import ListTile from "./components/ListTitle.vue";
 import ButtonGroup from "./components/ButtonGroup.vue";
 import ListItem from "./components/ListItem.vue";
 import CheckedAll from "./components/CheckedAll.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 const props = defineProps(propsDefination);
 const options = props.data.map((item) => item.title);
 const [targetIndex, setTargetIndex] = useTargetIndex(0);
@@ -80,9 +82,7 @@ const [rightListData, setRightListData, removeRightListData] = useRightListData(
   [],
   checkedData
 );
-const tempData:IDataItem[] = props.data.map(({data})=>data).flat();
-console.log(tempData);
-
+const tempData: IDataItem[] = props.data.map(({ data }) => data).flat();
 checkedData.left = tempData.filter((item) => item.checked);
 const { leftTitle, leftListData, transferButtonDisabled } = useComputedData(
   props.data,
@@ -98,26 +98,7 @@ const listItemHandlers = {
 };
 const leftCheckAllRef = ref<InstanceType<typeof CheckedAll>>();
 const rightCheckAllRef = ref<InstanceType<typeof CheckedAll>>();
-const checkAll = (leftOrRight: LeftOrRight) => {
-  switch (leftOrRight) {
-    case LeftOrRight.left:
-      leftListData.value.forEach((item) => {
-        setCheckedData(leftOrRight, item);
-      });
-      // leftCheckAllRef.value?.clearChecked();
 
-      break;
-    case LeftOrRight.right:
-      rightListData.value.forEach((item) => {
-        setCheckedData(leftOrRight, item);
-      });
-      // rightCheckAllRef.value?.clearChecked();
-
-      break;
-    default:
-      break;
-  }
-};
 </script>
 <style lang="scss" scoped>
 .transfer {

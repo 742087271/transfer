@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from "vue";
+import { PropType, watch } from "vue";
 import { LeftOrRight } from "../../extends/data.js";
 
 const props = defineProps({
@@ -52,6 +52,7 @@ const checkBoxClick = (
 const dragItem = (item: IDataItem) => {
   emits("dragItem", item);
 };
+
 </script>
 
 <style lang="scss" scoped>

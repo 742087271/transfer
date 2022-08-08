@@ -1,4 +1,4 @@
-import { computed, reactive, Ref, ref } from "vue";
+import { computed, reactive, Ref, ref, toRef } from "vue";
 import { LeftOrRight } from "../extends/data";
 
 export function useTargetIndex(initalIndex: number) {
@@ -55,9 +55,13 @@ export function useRightListData(
   const rightListData = ref(initalData);
   function setRightListData(newData: IDataItem[]) {
     // 只添加新的数据
+    
     const oldDataIds = rightListData.value.map((item) => item.id);
     const addData = newData.filter((item) => !oldDataIds.includes(item.id));
     rightListData.value = [...rightListData.value, ...addData];
+    newData.forEach((item) => {
+      item.checked = false;
+    })
     useCheckedData.left = [];
   }
   function removeRightListData(newData: IDataItem[]) {
@@ -66,6 +70,9 @@ export function useRightListData(
         (rightItem) => rightItem.id !== item.id
       );
     });
+    newData.forEach((item) => {
+      item.checked = false;
+    })
     useCheckedData.right = [];
   }
   return [rightListData, setRightListData, removeRightListData] as const;
