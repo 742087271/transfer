@@ -51,9 +51,8 @@ export default [
       {
         id: 7,
         name: "小米8 Pro Max",
-        disabled: true,
+        disabled: false,
         checked: false,
-
       },
       {
         id: 8,

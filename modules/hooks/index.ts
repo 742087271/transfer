@@ -57,7 +57,7 @@ export function useRightListData(
     // 只添加新的数据
     
     const oldDataIds = rightListData.value.map((item) => item.id);
-    const addData = newData.filter((item) => !oldDataIds.includes(item.id));
+    const addData = newData.filter((item) => !oldDataIds.includes(item.id) && !item.disabled);
     rightListData.value = [...rightListData.value, ...addData];
     newData.forEach((item) => {
       item.checked = false;
