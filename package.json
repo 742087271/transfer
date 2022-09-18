@@ -1,18 +1,25 @@
 {
-  "name": "transfer",
-  "private": true,
-  "version": "0.0.0",
+  "name": "transfer-wait",
+  "private": false,
+  "version": "1.0.13",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "build:lib": "vue-tsc --noEmit && vite build --mode lib",
     "preview": "vite preview"
   },
   "dependencies": {
     "sass": "^1.54.3",
+    "transfer-wait": "^1.0.18",
+    "vue": "^3.2.37",
+    "vue-router": "4"
+  },
+  "peerDependencies": {
     "vue": "^3.2.37"
   },
   "devDependencies": {
+    "@types/node": "^18.7.18",
     "@vitejs/plugin-vue": "^3.0.0",
     "typescript": "^4.6.4",
     "vite": "^3.0.0",

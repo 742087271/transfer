@@ -1,0 +1,15 @@
+# 忽略目录
+src
+modules
+node_modules
+public
+.vscode
+# 忽略指定文件
+vue.config.js
+.gitignore
+index.html
+tsconfig.json
+tsconfig.node.json
+yarn.lock
+vite-env.d.ts
+vite.config.ts

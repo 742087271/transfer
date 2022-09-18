@@ -1,0 +1,27 @@
+{
+  "name": "transfer-wait",
+  "private": false,
+  "version": "1.0.13",
+  "type": "module",
+  "main": "lib/transfer.js",
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "穿梭框",
+    "transfer",
+    "TRANSFER"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "sass": "^1.54.3",
+    "vue": "^3.2.37"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.37"
+  }
+}

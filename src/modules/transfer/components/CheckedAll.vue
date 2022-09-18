@@ -22,7 +22,7 @@ const props = defineProps({
     default: () => [],
   },
 });
-const checkBoxRef = ref<HTMLInputElement>();
+const checkBoxRef = ref<HTMLInputElement|null>(null);
 const checkAll = (ev: Event) => {
   const { checked } = ev.target as HTMLInputElement;
   if (checked) {
@@ -49,9 +49,13 @@ watchEffect(() => {
   // }
   if (props.data.length && props.data.every((item) => item.checked)) {
     nextTick(() => {
+      console.log(checkBoxRef, "checkBoxRef");
+      
       checkBoxRef.value!.checked = true;
     });
   } else {
+    console.log(checkBoxRef);
+
     nextTick(() => {
       checkBoxRef.value!.checked = false;
     });

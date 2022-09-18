@@ -73,7 +73,7 @@ import ListTile from "./components/ListTitle.vue";
 import ButtonGroup from "./components/ButtonGroup.vue";
 import ListItem from "./components/ListItem.vue";
 import CheckedAll from "./components/CheckedAll.vue";
-import { ref, watch } from "vue";
+import { ref } from "vue";
 const props = defineProps(propsDefination);
 const options = props.data.map((item) => item.title);
 const [targetIndex, setTargetIndex] = useTargetIndex(0);
